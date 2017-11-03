@@ -23,4 +23,4 @@ deploy:
   script: docker login --username $DOCKER_USER --password $DOCKER_PASS && make build && make docker_images VERSION=$COMMIT && make docker_push VERSION=$COMMIT
   on:
     go: 1.9
-    branch: master
+    # branch: master

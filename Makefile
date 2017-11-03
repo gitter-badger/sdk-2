@@ -1,6 +1,6 @@
 SHELL=/bin/bash
-NIX_OS_ARCHS?=darwin-amd64 linux-amd64
-WIN_OS_ARCHS?=windows-amd64
+NIX_OS_ARCHS?=linux-amd64
+WIN_OS_ARCHS?=
 DIST_DIR=dist
 COMMAND_DIR=cmd
 VERSION=$(shell ./version.sh)
@@ -47,6 +47,7 @@ TEST_PACKAGES=$(shell $(GO_LIST) ./... | grep -v vendor | grep -v testutil | gre
 COVERAGE_SOURCES=$(shell find . -name '*.go' | grep -v 'testutils' | grep -v 'testcases' | grep -v 'doc.go')
 BUILD_SOURCES=$(shell find . -name '*.go' | grep -v 'testutils' | grep -v 'testcases' | grep -v '_test.go' | grep -v 'doc.go')
 COMMANDS=$(shell ls $(COMMAND_DIR))
+COMMANDS=filetmpop
 
 NIX_EXECS=$(foreach command, $(COMMANDS), $(foreach os-arch, $(NIX_OS_ARCHS), $(DIST_DIR)/$(os-arch)/$(command)))
 WIN_EXECS=$(foreach command, $(COMMANDS), $(foreach os-arch, $(WIN_OS_ARCHS), $(DIST_DIR)/$(os-arch)/$(command).exe))
